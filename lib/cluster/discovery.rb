@@ -1,7 +1,9 @@
 require 'cluster/discovery/version'
 
 module Cluster
-  module Discovery
-    # Your code goes here...
+  class Discovery
+    def discover(discovery_service, *args)
+      Cluster.send(discovery_service.to_sym, :discover, args)
+    end
   end
 end
