@@ -31,6 +31,9 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    guard-rubocop (1.2.0)
+      guard (~> 2.0)
+      rubocop (~> 0.20)
     hashdiff (0.2.3)
     json (1.8.3)
     listen (3.0.5)
@@ -84,6 +87,7 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
+    terminal-notifier-guard (1.6.4)
     thor (0.19.1)
     thor-scmversion (1.7.0)
       mixlib-shellout
@@ -102,12 +106,14 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.7)
   cluster-discovery!
-  guard
-  guard-rspec
+  guard (~> 2.13)
+  guard-rspec (~> 4.6)
+  guard-rubocop (~> 1.2)
   rake (~> 10.0)
-  rspec
+  rspec (~> 3.4)
   rubocop (~> 0.34)
   simplecov (~> 0.11)
+  terminal-notifier-guard (~> 1.6)
   thor (~> 0.19.1)
   thor-scmversion (= 1.7.0)
   vcr (~> 3.0)
