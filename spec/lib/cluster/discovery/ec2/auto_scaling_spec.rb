@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Cluster::Discovery::EC2::AutoScaling' do
-  describe '.discover', vcr: true do
-    context 'can reuse the tag provider' do
+  describe '.discover' do
+    context 'can reuse the tag provider', vcr: true do
       before(:each) do
         @discovery = Cluster::Discovery::EC2::AutoScaling.new(
           aws_region: 'us-east-1'

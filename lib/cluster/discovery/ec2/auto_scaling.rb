@@ -12,11 +12,12 @@ module Cluster
         #  discovery by
         # @return [Array<Aws::EC2::Types::Instance>] Discovery result
         def discover(aws_asg:)
+          fail EmptyASGError if aws_asg.nil?
           tags = Cluster::Discovery::EC2::Tag.new(aws_region: @aws_region)
           tags.discover(aws_tags: [
             {
-              key: 'tag:aws:autoscaling:groupName',
-              values: [aws_asg]
+              key: 'aws:autoscaling:groupName',
+              value: aws_asg
             }
           ])
         end

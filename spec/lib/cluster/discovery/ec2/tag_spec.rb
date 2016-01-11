@@ -61,6 +61,11 @@ describe 'Cluster::Discovery::EC2::Tag' do
                         [{ key: 'Service', value: 'router' }])
       end
 
+      # TODO: add failing negative test for wrong key values
+      # Tags:
+      # { key: 'aws:autoscaling:groupName', values: ['foo-prod-v000'] }
+      # Resulting filters:
+      # { name: 'tag:aws:autoscaling:groupName', values: ['foo-prod-v000'] },
       let(:filters) do
         [
           { name: 'tag:Service', values: ['router'] },

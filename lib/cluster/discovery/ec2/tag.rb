@@ -38,6 +38,8 @@ module Cluster
 
         def build_tags(tags = [])
           unless tags.empty?
+            tag_keys = tags.map(&:keys).flatten.uniq
+            fail MalformedTagsError unless [:key, :value] == tag_keys
             tags.map! do |t|
               { name: "tag:#{t[:key]}", values: [t[:value]] }
             end
