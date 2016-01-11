@@ -9,26 +9,25 @@ module Cluster
         # Initialize the EC2 Client object
         #
         # @param [String] aws_region: The aws region
-        # @return [String] description of returned object
-        # FIXME: Lookup the return here
+        # @return [Aws::EC2::Client] The EC2 Client object
         def initialize(aws_region:)
           @ec2_client ||= Aws::EC2::Client.new(region: aws_region)
         end
 
         # Discover EC2 Instances by Tag
         #
-        # @param [Array<Hash>] aws_tags: describe aws_tags:
+        # @param [Array<Hash>] aws_tags AWS Tags to limit discovery
+        # @option aws_tags [String] :key The name of the tag
+        # @option aws_tags [Array<String>] :values The value(s) of the tag
+        # @example For example, aws_tags might look something like this:
+        #  [
+        #    { key: "tag:Service", values: ["MyService"] },
+        #    { key: "tag:Purpose", values: ["MyPurpose"] }
+        #  ]
         # @return [Type] description of returned object
-        # FIXME This input type in complicated
         def discover(aws_tags: [])
           fail EmptyTagsError if aws_tags.empty?
-          tags = build_tags(aws_tags)
-          resp = ec2_client.describe_instances(filters: tags)
-          instances = resp.inject([]) do |a, page|
-            a << page.reservations.map(&:instances)
-          end
-          instances = instances.flatten.compact
-          instances.sort_by! { |x| "#{x.launch_time.to_i}-#{x.instance_id}" }
+          discover_instances_by_tags(build_tags(aws_tags))
         end
 
         private
@@ -45,6 +44,15 @@ module Cluster
           end
           tags << default_tags
           tags.flatten
+        end
+
+        def discover_instances_by_tags(tags)
+          instances = ec2_client.describe_instances(
+            filters: tags).inject([]) do |a, page|
+            a << page.reservations.map(&:instances)
+          end
+          instances = instances.flatten.compact
+          instances.sort_by! { |x| "#{x.launch_time.to_i}-#{x.instance_id}" }
         end
       end
     end

@@ -21,10 +21,8 @@ describe 'Cluster::Discovery::EC2::Tag' do
         expect(@discovery).to respond_to(:discover)
       end
 
-      # FIXME: Fix the error class
       it 'tags cannot be empty' do
-        skip
-        expect { @discovery.discovery }.to(
+        expect { @discovery.discover }.to(
           raise_error(Cluster::Discovery::EmptyTagsError),
           'Tags cannot be empty'
         )
@@ -60,7 +58,7 @@ describe 'Cluster::Discovery::EC2::Tag' do
     context 'parse input tag' do
       let(:tags) do
         @discovery.send(:build_tags,
-        [{ key: 'Service', value: 'router' }])
+                        [{ key: 'Service', value: 'router' }])
       end
 
       let(:filters) do
