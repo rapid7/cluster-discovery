@@ -21,6 +21,7 @@ Style/Documentation:
     - 'test/**/*'
     - 'lib/cluster/discovery.rb'
     - 'lib/cluster/discovery/version.rb'
+    - 'lib/**/*'
 
 # Offense count: 2
 # Cop supports --auto-correct.
