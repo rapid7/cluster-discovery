@@ -1,19 +1,7 @@
 module Cluster
   module Discovery
     module EC2
-      class Tag
-        # @!attribute [r]
-        # The EC2 Client Object
-        attr_reader :ec2_client
-
-        # Initialize the EC2 Client object
-        #
-        # @param [String] aws_region: The aws region
-        # @return [Aws::EC2::Client] The EC2 Client object
-        def initialize(aws_region:)
-          @ec2_client ||= Aws::EC2::Client.new(region: aws_region)
-        end
-
+      class Tag < Cluster::Discovery::EC2::Base
         # Discover EC2 Instances by Tag
         #
         # @param [Array<Hash>] aws_tags AWS Tags to limit discovery
@@ -58,5 +46,3 @@ module Cluster
     end
   end
 end
-
-require 'aws-sdk'
