@@ -1,4 +1,3 @@
-require_relative 'discovery/ec2/base'
 require_relative 'discovery/ec2/tag'
 require_relative 'discovery/ec2/auto_scaling'
 require_relative 'discovery/errors'
