@@ -3,10 +3,10 @@
 This is a library that provides a generic interface to multiple cluster providers.
 
 ## Cluster Providers
-Cluster providers are something that provides metadata about a collection of hosts in a cluster.  Supported proviers are as follows:
+Cluster providers are something that provides metadata about a collection of hosts in a cluster.  Supported providers are as follows:
 
-* [ ] EC2 Tags
-* [ ] EC2 AutoScaling Groups
+* [x] EC2 Tags
+* [x] EC2 AutoScaling Groups
 * [ ] Consul Services
 * [ ] Static Lists
 
