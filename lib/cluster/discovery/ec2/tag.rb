@@ -24,7 +24,8 @@ module Cluster
         #    { key: "tag:Service", values: ["MyService"] },
         #    { key: "tag:Purpose", values: ["MyPurpose"] }
         #  ]
-        # @return [Type] description of returned object
+        # @return [Array<Aws::EC2::Types::Instance>] Array of EC2
+        #  Instance objects
         def discover(aws_tags: [])
           fail EmptyTagsError if aws_tags.empty?
           discover_instances_by_tags(build_tags(aws_tags))
