@@ -17,7 +17,7 @@ module Cluster
     end
 
     def ec2_asg(action, *args)
-      Cluster::EC2::Tag.send(action, args)
+      Cluster::EC2::AutoScaling.send(action, args)
     end
   end
 end
