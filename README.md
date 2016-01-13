@@ -3,10 +3,10 @@
 This is a library that provides a generic interface to multiple cluster providers.
 
 ## Cluster Providers
-Cluster providers are something that provides metadata about a collection of hosts in a cluster.  Supported proviers are as follows:
+Cluster providers are something that provides metadata about a collection of hosts in a cluster.  Supported providers are as follows:
 
-* [ ] EC2 Tags
-* [ ] EC2 AutoScaling Groups
+* [x] EC2 Tags
+* [x] EC2 AutoScaling Groups
 * [ ] Consul Services
 * [ ] Static Lists
 
@@ -28,13 +28,33 @@ Or install it yourself as:
 
 ## Usage
 
-** WIP - I think the API is going to look something like this**
+### EC2 Tags
 
-Cluster::Discovery.discover('ec2_tags',
-                            aws_region: 'us-east-1',
-                            aws_tags: { name: 'Service', values: ['router'] })
+To discover cluster instances with EC2 Tags use something like the following example.  The keys `aws_region`, `aws_tags`(`key`, `value`) are all required.
 
+This returns an Array of EC2 Instance Objects
 
+```ruby
+instances = Cluster::Discovery.discover(
+  'ec2_tag',
+  aws_region: 'us-east-1',
+  aws_tags: [{ key: 'Service', value: 'router' }])
+
+instances.map(&:instance_id)
+```
+
+### AutoScaling Groups
+
+To discover cluster instances by AutoScaling Group use something like the following example.  The keys `aws_region`, `aws_asg` are all required.
+
+```ruby
+instances = Cluster::Discovery.discover(
+  'ec2_asg',
+  aws_region: 'us-east-1',
+  aws_asg: 'foo-prod-v000')
+
+instances.map(&:instance_id)
+```
 
 ## Contributing
 

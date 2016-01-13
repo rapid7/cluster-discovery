@@ -1,0 +1,191 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://ec2.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=DescribeInstances&Filter.1.Name=tag%3Aaws%3Aautoscaling%3AgroupName&Filter.1.Value.1=foo-prod-v000&Filter.2.Name=instance-state-name&Filter.2.Value.1=running&Version=2015-10-01
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.2.9 ruby/2.1.5 x86_64-darwin12.0
+      X-Amz-Date:
+      - 20160111T214109Z
+      Host:
+      - ec2.us-east-1.amazonaws.com
+      X-Amz-Security-Token:
+      - AQoDYXdzEPb//////////wEakAOUV7KTlmOApJ5r79wLVozMAi40JMnm3xffLMY4yIL6qrzDoWRoXQidbD6FSuy9AlXS3GqTNUH9kYwdJN3OUgVxLewyqM5xeanf3a+eNscOH9gPwyy918MAREq2av7prXkiKssOOHGhXNrZdGLMHcnyjssIiXQgxwrLrVuwrnxl1OcWOniPb52GPnZcAwlubqSHxeN4XVAnhja3CwXLUqqmNCAYstlC0KSw0iO4Y9Ombe9qjMF4+PmGsa2FvSriIWjY/YOE43nWn6HSTiJsZEIymv2R8hTzQs796OdlWOEkyMBhWqii4vkiyX7iaH5ayM7LD5k7LbwZXZcD77bvBRChhI4qPLiKKTiH+MdWT6P626riRuVqheI/rudSvlsuUzq7Hs8YHfVmBdSly/pk9BDS2XhK7Z2SA2FeOxvL9q/fi9ZbiIL7cRdyr7DpVm2jcj1fodcV+11NGLqQKCvouhdeGrczK6JU+YfKWqfmN6z5ueO+0hmhJjpwH+2NdwrxXXX1kE8Sx/2bHg0U6gcuhvpTIJeo0LQF
+      X-Amz-Content-Sha256:
+      - a42fedff4ee4d1452a82db452ce5d626bd98201da7e2b11c64248b9a89a6ce08
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=ASIAJXTSTL45SLHQUIJQ/20160111/us-east-1/ec2/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-security-token,
+        Signature=1cd81e6fe08cdf8fc1e32d15ad6c3c304e3379bf62d31238685ec60d08f4804b
+      Content-Length:
+      - '183'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      Date:
+      - Mon, 11 Jan 2016 21:41:09 GMT
+      Server:
+      - AmazonEC2
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2015-10-01/">
+            <requestId>a2cc4a5c-504b-432f-be15-a5f803969b04</requestId>
+            <reservationSet>
+                <item>
+                    <reservationId>r-df91310c</reservationId>
+                    <ownerId>042293964381</ownerId>
+                    <groupSet/>
+                    <instancesSet>
+                        <item>
+                            <instanceId>i-dbfb806d</instanceId>
+                            <imageId>ami-906569f8</imageId>
+                            <instanceState>
+                                <code>16</code>
+                                <name>running</name>
+                            </instanceState>
+                            <privateDnsName>ip-172-31-8-125.ec2.internal</privateDnsName>
+                            <dnsName>ec2-54-173-176-184.compute-1.amazonaws.com</dnsName>
+                            <reason/>
+                            <keyName>athompson</keyName>
+                            <amiLaunchIndex>0</amiLaunchIndex>
+                            <productCodes/>
+                            <instanceType>m4.large</instanceType>
+                            <launchTime>2015-12-18T20:13:22.000Z</launchTime>
+                            <placement>
+                                <availabilityZone>us-east-1a</availabilityZone>
+                                <groupName/>
+                                <tenancy>default</tenancy>
+                            </placement>
+                            <monitoring>
+                                <state>enabled</state>
+                            </monitoring>
+                            <subnetId>subnet-57fedf20</subnetId>
+                            <vpcId>vpc-e826368d</vpcId>
+                            <privateIpAddress>172.31.8.125</privateIpAddress>
+                            <ipAddress>54.173.176.184</ipAddress>
+                            <sourceDestCheck>true</sourceDestCheck>
+                            <groupSet>
+                                <item>
+                                    <groupId>sg-29f80e50</groupId>
+                                    <groupName>foo</groupName>
+                                </item>
+                            </groupSet>
+                            <architecture>x86_64</architecture>
+                            <rootDeviceType>ebs</rootDeviceType>
+                            <rootDeviceName>/dev/xvda</rootDeviceName>
+                            <blockDeviceMapping>
+                                <item>
+                                    <deviceName>/dev/xvda</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-c59f9026</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2015-12-18T20:13:25.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                                <item>
+                                    <deviceName>/dev/sdc</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-0c808fef</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2015-12-18T20:13:25.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                                <item>
+                                    <deviceName>/dev/sdb</deviceName>
+                                    <ebs>
+                                        <volumeId>vol-3b808fd8</volumeId>
+                                        <status>attached</status>
+                                        <attachTime>2015-12-18T20:13:25.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </ebs>
+                                </item>
+                            </blockDeviceMapping>
+                            <virtualizationType>hvm</virtualizationType>
+                            <clientToken>d27bdeb2-786c-4991-a6bf-4b31f899907c_us-east-1a_1</clientToken>
+                            <tagSet>
+                                <item>
+                                    <key>aws:autoscaling:groupName</key>
+                                    <value>foo-prod-v000</value>
+                                </item>
+                            </tagSet>
+                            <hypervisor>xen</hypervisor>
+                            <networkInterfaceSet>
+                                <item>
+                                    <networkInterfaceId>eni-951337d9</networkInterfaceId>
+                                    <subnetId>subnet-57fedf20</subnetId>
+                                    <vpcId>vpc-e826368d</vpcId>
+                                    <description/>
+                                    <ownerId>042293964381</ownerId>
+                                    <status>in-use</status>
+                                    <macAddress>0a:73:be:e5:02:2d</macAddress>
+                                    <privateIpAddress>172.31.8.125</privateIpAddress>
+                                    <privateDnsName>ip-172-31-8-125.ec2.internal</privateDnsName>
+                                    <sourceDestCheck>true</sourceDestCheck>
+                                    <groupSet>
+                                        <item>
+                                            <groupId>sg-29f80e50</groupId>
+                                            <groupName>foo</groupName>
+                                        </item>
+                                    </groupSet>
+                                    <attachment>
+                                        <attachmentId>eni-attach-af7a6444</attachmentId>
+                                        <deviceIndex>0</deviceIndex>
+                                        <status>attached</status>
+                                        <attachTime>2015-12-18T20:13:22.000Z</attachTime>
+                                        <deleteOnTermination>true</deleteOnTermination>
+                                    </attachment>
+                                    <association>
+                                        <publicIp>54.173.176.184</publicIp>
+                                        <publicDnsName>ec2-54-173-176-184.compute-1.amazonaws.com</publicDnsName>
+                                        <ipOwnerId>amazon</ipOwnerId>
+                                    </association>
+                                    <privateIpAddressesSet>
+                                        <item>
+                                            <privateIpAddress>172.31.8.125</privateIpAddress>
+                                            <privateDnsName>ip-172-31-8-125.ec2.internal</privateDnsName>
+                                            <primary>true</primary>
+                                            <association>
+                                            <publicIp>54.173.176.184</publicIp>
+                                            <publicDnsName>ec2-54-173-176-184.compute-1.amazonaws.com</publicDnsName>
+                                            <ipOwnerId>amazon</ipOwnerId>
+                                            </association>
+                                        </item>
+                                    </privateIpAddressesSet>
+                                </item>
+                            </networkInterfaceSet>
+                            <iamInstanceProfile>
+                                <arn>arn:aws:iam::042293964381:instance-profile/test-athompson</arn>
+                                <id>AIPAIXKM44WHMQ4NUUINY</id>
+                            </iamInstanceProfile>
+                            <ebsOptimized>false</ebsOptimized>
+                        </item>
+                    </instancesSet>
+                    <requesterId>226008221399</requesterId>
+                </item>
+            </reservationSet>
+        </DescribeInstancesResponse>
+    http_version: 
+  recorded_at: Mon, 11 Jan 2016 21:41:09 GMT
+recorded_with: VCR 3.0.1
