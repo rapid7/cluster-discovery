@@ -17,10 +17,13 @@ module Cluster
       # @param [Array] tags: ([]) List of tags to limit discovery by
       # @return [Struct] Object representing the Node in the service
       def discover(consul_service:, leader: false, tags: [])
-        Diplomat::Service.get(
+        scope, options = build_extra_opts(leader: leader, tags: tags)
+        nodes = Diplomat::Service.get(
           consul_service,
-          build_extra_opts(leader: leader, tags: tags)
+          scope,
+          options
         )
+        [nodes].flatten
       end
 
       # Build args for Diplomat::Service.get

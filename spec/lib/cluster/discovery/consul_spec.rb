@@ -73,17 +73,46 @@ describe 'Cluster::Discovery::Consul' do
         consul_url: 'http://172.28.128.104:8500')
     end
 
+    def map_resp(obj)
+      obj.map(&:Address)
+    end
+
     let(:consul_notags_leader) do
-      @consul.discover(consul_service: 'redis', leader: true)
+      map_resp(@consul.discover(consul_service: 'redis', leader: true))
     end
 
     let(:consul_notags_noleader) do
-      @consul.discover(consul_service: 'redis')
+      map_resp(@consul.discover(consul_service: 'redis'))
+    end
+
+    let(:consul_tags_leader) do
+      map_resp(@consul.discover(
+                 consul_service: 'redis',
+                 leader: true,
+                 tags: 'master'))
+    end
+
+    let(:consul_tags_noleader) do
+      map_resp(@consul.discover(consul_service: 'redis', tags: 'master'))
     end
 
     context 'can discover leader node' do
       it 'can discover nodes without tags' do
-        expect(consul_notags_leader.Address).to eq('192.168.10.10')
+        expect(consul_notags_leader.first).to eq('192.168.10.10')
+      end
+
+      it 'can discover nodes with tags' do
+        expect(consul_tags_leader.first).to eq('192.168.10.10')
+      end
+    end
+
+    context 'can discover all nodes' do
+      it 'can discover nodes without tags' do
+        expect(consul_notags_noleader.first).to eq('192.168.10.10')
+      end
+
+      it 'can discover nodes with tags' do
+        expect(consul_tags_noleader.length).to eq(3)
       end
     end
   end
