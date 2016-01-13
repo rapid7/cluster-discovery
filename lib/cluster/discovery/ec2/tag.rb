@@ -54,8 +54,7 @@ module Cluster
             filters: tags).inject([]) do |a, page|
             a << page.reservations.map(&:instances)
           end
-          instances = instances.flatten.compact
-          instances.sort_by! { |x| "#{x.launch_time.to_i}-#{x.instance_id}" }
+          instances.flatten.compact
         end
       end
     end
