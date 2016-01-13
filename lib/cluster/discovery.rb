@@ -1,5 +1,6 @@
 require_relative 'discovery/ec2/tag'
 require_relative 'discovery/ec2/auto_scaling'
+require_relative 'discovery/consul'
 require_relative 'discovery/errors'
 
 module Cluster
@@ -21,6 +22,10 @@ module Cluster
           aws_region: args[:aws_region])
         c.send(action, aws_asg: args[:aws_asg])
       end
+    end
+
+    def consul(action, *args)
+      Cluster::Discovery::Consul.send(action, args)
     end
   end
 end
