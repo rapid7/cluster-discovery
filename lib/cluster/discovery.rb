@@ -22,10 +22,17 @@ module Cluster
           aws_region: args[:aws_region])
         c.send(action, aws_asg: args[:aws_asg])
       end
-    end
 
-    def consul(action, *args)
-      Cluster::Discovery::Consul.send(action, args)
+      def consul(action, args)
+        args = args.first
+        consul_url = args.delete(:consul_url) if args.key?(:consul_url)
+        if consul_url
+          c = Cluster::Discovery::Consul.new(consul_url: consul_url)
+        else
+          c = Cluster::Discovery::Consul.new
+        end
+        c.send(action, args)
+      end
     end
   end
 end

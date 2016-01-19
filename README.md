@@ -56,6 +56,21 @@ instances = Cluster::Discovery.discover(
 instances.map(&:instance_id)
 ```
 
+### Consul
+
+To discover cluster instances using Consul
+by AutoScaling Group use something like the following example.  The keys `aws_region`, `aws_asg` are all required.
+
+```ruby
+instances = Cluster::Discovery.discover(
+  'consul',
+  consul_url: 'http://my.consul.cluster:8500',
+  consul_service: 'redis',
+  leader: true,
+  tags: 'master')
+instances.map(&:Address)
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/rapid7/cluster-discovery/fork )
