@@ -48,7 +48,7 @@ module Cluster
         end
       end
 
-      def service_response(nodes)
+      def service_response(nodes) # rubocop:disable Metrics/MethodLength
         nodes.map do |node|
           n = node['Node']
           s = node['Service']
