@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Cluster::Discovery::VERSION
   spec.authors       = ['Andrew Thompson']
   spec.email         = ['Andrew_Thompson@rapid7.com']
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = 'Cluster Discovery Library'
+  spec.description   = %q{This is a library that provides a generic interface to multiple cluster providers.  Cluster providers include: EC2 Tags, EC2 AutoScaling Groups, and Consul}
   spec.homepage      = ''
   spec.license       = 'MIT'
 
