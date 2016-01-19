@@ -1,1 +1,9 @@
 inherit_from: .rubocop_todo.yml
+
+Metrics/MethodLength:
+  Exclude:
+    - 'Rakefile'
+
+Metrics/LineLength:
+  Exclude:
+    - 'Rakefile'

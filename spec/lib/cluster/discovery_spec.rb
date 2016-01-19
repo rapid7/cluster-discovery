@@ -8,7 +8,7 @@ describe 'Cluster::Discovery' do
       it { expect(discovery).to respond_to(:discover) }
     end
 
-    context 'can discover nodes' do
+    context 'can discover nodes', vcr: true do
       it 'discovery with consul' do
         consul = Cluster::Discovery.discover(
           'consul',

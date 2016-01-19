@@ -67,7 +67,7 @@ describe 'Cluster::Discovery::Consul' do
     end
   end
 
-  describe '.discover' do
+  describe '.discover', vcr: true do
     before(:each) do
       @consul = Cluster::Discovery::Consul.new(
         consul_url: 'http://172.28.128.104:8500')
