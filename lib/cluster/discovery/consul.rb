@@ -26,16 +26,26 @@ module Cluster
         nodes = [nodes]
         nodes.flatten!
 
-        if healthy
-          nodes = nodes.map(&:Address)
-          nodes = Diplomat::Health.service(
-            consul_service
-          ).delete_if { |s| !nodes.include?(s['Node']['Address']) }
-
-          nodes.delete_if { |n| n['Checks'].any? { |c| c['Status'] != 'passing' } }
-          nodes = service_response(nodes)
-        end
+        nodes = discover_health_nodes(nodes, consul_service) if healthy
         nodes
+      end
+
+      def discover_health_nodes(nodes, consul_service)
+        nodes = filtered_healthy_nodes(nodes.map(&:Address), consul_service)
+        nodes = nodes_passing_checks(nodes)
+        service_response(nodes)
+      end
+
+      def filtered_healthy_nodes(node_list, consul_service)
+        Diplomat::Health.service(consul_service).delete_if do |service|
+          !node_list.include?(service['Node']['Address'])
+        end
+      end
+
+      def nodes_passing_checks(nodes)
+        nodes.delete_if do |node|
+          node['Checks'].any? { |check| check['Status'] != 'passing' }
+        end
       end
 
       def service_response(nodes)
