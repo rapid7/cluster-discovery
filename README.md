@@ -72,6 +72,16 @@ instances.map(&:Address)
 
 ## Contributing
 
+### Running the tests
+
+```bash
+TEST_CONSUL_HOST=my.consul.cluster rake spec
+```
+Or just:
+```bash
+rake spec
+```
+
 1. Fork it ( https://github.com/rapid7/cluster-discovery/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)

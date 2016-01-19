@@ -20,6 +20,10 @@
 require_relative '../lib/cluster/discovery'
 require 'vcr'
 
+def test_consul_host
+  ENV['TEST_CONSUL_HOST'] || '172.28.128.104'
+end
+
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock

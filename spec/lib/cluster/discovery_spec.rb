@@ -12,7 +12,7 @@ describe 'Cluster::Discovery' do
       it 'discovery with consul' do
         consul = Cluster::Discovery.discover(
           'consul',
-          consul_url: 'http://172.28.128.104:8500',
+          consul_url: "http://#{test_consul_host}:8500",
           consul_service: 'redis',
           leader: true,
           tags: 'master')

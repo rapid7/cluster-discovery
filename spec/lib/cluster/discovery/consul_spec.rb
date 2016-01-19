@@ -70,7 +70,7 @@ describe 'Cluster::Discovery::Consul' do
   describe '.discover', vcr: true do
     before(:each) do
       @consul = Cluster::Discovery::Consul.new(
-        consul_url: 'http://172.28.128.104:8500')
+        consul_url: "http://#{test_consul_host}:8500")
     end
 
     def map_resp(obj)
