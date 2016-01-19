@@ -58,8 +58,7 @@ instances.map(&:instance_id)
 
 ### Consul
 
-To discover cluster instances using Consul
-by AutoScaling Group use something like the following example.  The keys `aws_region`, `aws_asg` are all required.
+To discover cluster instances using Consul use something like the following example. The keys `consul_url` and `consul_service` are required, `leader` and `tags` are optional.
 
 ```ruby
 instances = Cluster::Discovery.discover(
