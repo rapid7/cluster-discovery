@@ -56,7 +56,31 @@ instances = Cluster::Discovery.discover(
 instances.map(&:instance_id)
 ```
 
+### Consul
+
+To discover cluster instances using Consul use something like the following example. The keys `consul_url` and `consul_service` are required, `leader` and `tags` are optional.
+
+```ruby
+instances = Cluster::Discovery.discover(
+  'consul',
+  consul_url: 'http://my.consul.cluster:8500',
+  consul_service: 'redis',
+  leader: true,
+  tags: 'master')
+instances.map(&:Address)
+```
+
 ## Contributing
+
+### Running the tests
+
+```bash
+TEST_CONSUL_HOST=my.consul.cluster rake spec
+```
+Or just:
+```bash
+rake spec
+```
 
 1. Fork it ( https://github.com/rapid7/cluster-discovery/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)

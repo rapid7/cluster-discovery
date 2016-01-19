@@ -22,4 +22,5 @@ group :development, :test do
   gem 'vcr', '~> 3.0'
   gem 'webmock', '~> 1.22'
   gem 'rspec', '~> 3.4'
+  gem 'httparty', '~> 0.13'
 end
