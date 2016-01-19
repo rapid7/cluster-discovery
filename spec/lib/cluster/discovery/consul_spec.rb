@@ -77,42 +77,84 @@ describe 'Cluster::Discovery::Consul' do
       obj.map(&:Address)
     end
 
-    let(:consul_notags_leader) do
+    let(:consul_notags_leader_health) do
       map_resp(@consul.discover(consul_service: 'redis', leader: true))
     end
 
-    let(:consul_notags_noleader) do
+    let(:consul_notags_noleader_health) do
       map_resp(@consul.discover(consul_service: 'redis'))
     end
 
-    let(:consul_tags_leader) do
+    let(:consul_tags_leader_health) do
       map_resp(@consul.discover(
                  consul_service: 'redis',
                  leader: true,
                  tags: 'master'))
     end
 
-    let(:consul_tags_noleader) do
+    let(:consul_tags_noleader_health) do
       map_resp(@consul.discover(consul_service: 'redis', tags: 'master'))
+    end
+
+    let(:consul_notags_leader_nohealth) do
+      map_resp(@consul.discover(
+                 consul_service: 'redis',
+                 leader: true,
+                 healthy: false))
+    end
+
+    let(:consul_notags_noleader_nohealth) do
+      map_resp(@consul.discover(consul_service: 'redis', healthy: false))
+    end
+
+    let(:consul_tags_leader_nohealth) do
+      map_resp(@consul.discover(
+                 consul_service: 'redis',
+                 leader: true,
+                 tags: 'master',
+                 healthy: false))
+    end
+
+    let(:consul_tags_noleader_nohealth) do
+      map_resp(@consul.discover(
+                 consul_service: 'redis',
+                 tags: 'master',
+                 healthy: false))
     end
 
     context 'can discover leader node' do
       it 'can discover nodes without tags' do
-        expect(consul_notags_leader.first).to eq('192.168.10.10')
+        expect(consul_notags_leader_nohealth.first).to eq('192.168.10.10')
+      end
+
+      it 'can discover nodes without tags and health' do
+        expect(consul_notags_leader_health.first).to eq('192.168.10.10')
       end
 
       it 'can discover nodes with tags' do
-        expect(consul_tags_leader.first).to eq('192.168.10.10')
+        expect(consul_tags_leader_nohealth.first).to eq('192.168.10.10')
+      end
+
+      it 'can discover nodes with tags and health' do
+        expect(consul_tags_leader_health.first).to eq('192.168.10.10')
       end
     end
 
     context 'can discover all nodes' do
       it 'can discover nodes without tags' do
-        expect(consul_notags_noleader.first).to eq('192.168.10.10')
+        expect(consul_notags_noleader_nohealth.last).to eq('192.168.10.15')
+      end
+
+      it 'can discover nodes without tags and health' do
+        expect(consul_notags_noleader_health.last).to eq('192.168.10.13')
       end
 
       it 'can discover nodes with tags' do
-        expect(consul_tags_noleader.length).to eq(3)
+        expect(consul_tags_noleader_nohealth.length).to eq(3)
+      end
+
+      it 'can discover nodes with tags and health' do
+        expect(consul_tags_noleader_health.length).to eq(1)
       end
     end
   end

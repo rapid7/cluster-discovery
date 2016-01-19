@@ -41,11 +41,11 @@ end
 
 task :refresh_fixtures do
   register_service(id: '1', ip: '192.168.10.10', tag: 'master', status: 'passing')
-  register_service(id: '2', ip: '192.168.10.11', tag: 'slave', status: 'passing')
-  register_service(id: '3', ip: '192.168.10.12', tag: 'master', status: 'passing')
+  register_service(id: '2', ip: '192.168.10.11', tag: 'slave', status: 'warning')
+  register_service(id: '3', ip: '192.168.10.12', tag: 'master', status: 'critical')
   register_service(id: '4', ip: '192.168.10.13', tag: 'slave', status: 'passing')
-  register_service(id: '5', ip: '192.168.10.14', tag: 'master', status: 'passing')
-  register_service(id: '6', ip: '192.168.10.15', tag: 'slave', status: 'passing')
+  register_service(id: '5', ip: '192.168.10.14', tag: 'master', status: 'warning')
+  register_service(id: '6', ip: '192.168.10.15', tag: 'slave', status: 'critical')
 end
 
 task default: [:spec, :rubocop]

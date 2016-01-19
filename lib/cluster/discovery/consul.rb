@@ -16,14 +16,45 @@ module Cluster
       # @param [Boolean] leader: (false) Fetch :all or or :first(the leader)
       # @param [Array] tags: ([]) List of tags to limit discovery by
       # @return [Struct] Object representing the Node in the service
-      def discover(consul_service:, leader: false, tags: [])
+      def discover(consul_service:, leader: false, tags: [], healthy: true)
         scope, options = build_extra_opts(leader: leader, tags: tags)
         nodes = Diplomat::Service.get(
           consul_service,
           scope,
           options
         )
-        [nodes].flatten
+        nodes = [nodes]
+        nodes.flatten!
+
+        if healthy
+          nodes = nodes.map(&:Address)
+          nodes = Diplomat::Health.service(
+            consul_service
+          ).delete_if { |s| !nodes.include?(s['Node']['Address']) }
+
+          nodes.delete_if { |n| n['Checks'].any? { |c| c['Status'] != 'passing' } }
+          nodes = service_response(nodes)
+        end
+        nodes
+      end
+
+      def service_response(nodes)
+        nodes.map do |node|
+          n = node['Node']
+          s = node['Service']
+          OpenStruct.new(
+            Node: n['Node'],
+            Address: n['Address'],
+            ServiceID: s['ID'],
+            ServiceName: s['Service'],
+            ServiceTags: s['Tags'],
+            ServiceAddress: s['Address'],
+            ServicePort: s['Port'],
+            Checks: node['Checks'],
+            _Node: node['Node'],
+            _Service: node['Service']
+          )
+        end
       end
 
       # Build args for Diplomat::Service.get
@@ -44,3 +75,4 @@ module Cluster
 end
 
 require 'diplomat'
+require 'ostruct'

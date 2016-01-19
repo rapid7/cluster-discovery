@@ -21,18 +21,18 @@ http_interactions:
       Content-Type:
       - application/json
       X-Consul-Index:
-      - '161'
+      - '278'
       X-Consul-Knownleader:
       - 'true'
       X-Consul-Lastcontact:
       - '0'
       Date:
-      - Tue, 19 Jan 2016 17:10:41 GMT
+      - Tue, 19 Jan 2016 18:54:27 GMT
       Content-Length:
       - '499'
     body:
       encoding: UTF-8
       string: '[{"Node":"foobar1","Address":"192.168.10.10","ServiceID":"redis1","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar5","Address":"192.168.10.14","ServiceID":"redis5","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar3","Address":"192.168.10.12","ServiceID":"redis3","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000}]'
     http_version: 
-  recorded_at: Tue, 19 Jan 2016 17:10:41 GMT
+  recorded_at: Tue, 19 Jan 2016 18:54:26 GMT
 recorded_with: VCR 3.0.1

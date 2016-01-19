@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://172.28.128.104:8500/v1/catalog/service/redis?tag=master
+    uri: http://172.28.128.104:8500/v1/catalog/service/redis
     body:
       encoding: US-ASCII
       string: ''
@@ -29,12 +29,12 @@ http_interactions:
       Date:
       - Tue, 19 Jan 2016 18:54:27 GMT
       Content-Length:
-      - '499'
+      - '994'
     body:
       encoding: UTF-8
-      string: '[{"Node":"foobar1","Address":"192.168.10.10","ServiceID":"redis1","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar5","Address":"192.168.10.14","ServiceID":"redis5","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar3","Address":"192.168.10.12","ServiceID":"redis3","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000}]'
+      string: '[{"Node":"foobar1","Address":"192.168.10.10","ServiceID":"redis1","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar2","Address":"192.168.10.11","ServiceID":"redis2","ServiceName":"redis","ServiceTags":["slave","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar3","Address":"192.168.10.12","ServiceID":"redis3","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar4","Address":"192.168.10.13","ServiceID":"redis4","ServiceName":"redis","ServiceTags":["slave","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar5","Address":"192.168.10.14","ServiceID":"redis5","ServiceName":"redis","ServiceTags":["master","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000},{"Node":"foobar6","Address":"192.168.10.15","ServiceID":"redis6","ServiceName":"redis","ServiceTags":["slave","v1"],"ServiceAddress":"127.0.0.1","ServicePort":8000}]'
     http_version: 
-  recorded_at: Tue, 19 Jan 2016 18:54:27 GMT
+  recorded_at: Tue, 19 Jan 2016 18:54:26 GMT
 - request:
     method: get
     uri: http://172.28.128.104:8500/v1/health/service/redis
@@ -75,5 +75,5 @@ http_interactions:
         health check","Status":"warning","Notes":"Script based health check","Output":"","ServiceID":"redis5","ServiceName":"redis"}]},{"Node":{"Node":"foobar6","Address":"192.168.10.15"},"Service":{"ID":"redis6","Service":"redis","Tags":["slave","v1"],"Address":"127.0.0.1","Port":8000},"Checks":[{"Node":"foobar6","CheckID":"service:redis1","Name":"Redis
         health check","Status":"critical","Notes":"Script based health check","Output":"","ServiceID":"redis6","ServiceName":"redis"}]}]'
     http_version: 
-  recorded_at: Tue, 19 Jan 2016 18:54:27 GMT
+  recorded_at: Tue, 19 Jan 2016 18:54:26 GMT
 recorded_with: VCR 3.0.1
