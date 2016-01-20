@@ -58,7 +58,9 @@ instances.map(&:instance_id)
 
 ### Consul
 
-To discover cluster instances using Consul use something like the following example. The keys `consul_url` and `consul_service` are required, `leader` and `tags` are optional.
+To discover cluster instances using Consul use something like the following example. The keys `consul_url` and `consul_service` are required, `leader`, `tags`, and `health` are optional.
+
+By default this will only return nodes passing all health checks.  To change this behavior set `healthy` to `false`.
 
 ```ruby
 instances = Cluster::Discovery.discover(
@@ -66,7 +68,8 @@ instances = Cluster::Discovery.discover(
   consul_url: 'http://my.consul.cluster:8500',
   consul_service: 'redis',
   leader: true,
-  tags: 'master')
+  tags: 'master',
+  health: true)
 instances.map(&:Address)
 ```
 
