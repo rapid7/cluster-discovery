@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['Andrew_Thompson@rapid7.com']
   spec.summary       = 'Cluster Discovery Library'
   spec.description   = %q{This is a library that provides a generic interface to multiple cluster providers.  Cluster providers include: EC2 Tags, EC2 AutoScaling Groups, and Consul}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/rapid7/cluster-discovery'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
