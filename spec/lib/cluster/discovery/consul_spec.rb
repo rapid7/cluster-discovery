@@ -67,7 +67,7 @@ describe 'Cluster::Discovery::Consul' do
     end
   end
 
-  describe '.discover', vcr: true do
+  describe '.discover', vcr: { record: :new_episodes } do
     before(:each) do
       @consul = Cluster::Discovery::Consul.new(
         consul_url: "http://#{test_consul_host}:8500")
@@ -122,39 +122,48 @@ describe 'Cluster::Discovery::Consul' do
                  healthy: false))
     end
 
-    context 'can discover leader node' do
-      it 'can discover nodes without tags' do
-        expect(consul_notags_leader_nohealth.first).to eq('192.168.10.10')
+    context 'leader node' do
+      context 'without tags' do
+        it do
+          expect(consul_notags_leader_nohealth.first).to eq('192.168.10.10')
+        end
+
+        it 'and health' do
+          expect(consul_notags_leader_health.first).to eq('192.168.10.10')
+        end
       end
 
-      it 'can discover nodes without tags and health' do
-        expect(consul_notags_leader_health.first).to eq('192.168.10.10')
-      end
+      context 'with tags' do
+        it do
+          expect(consul_tags_leader_nohealth.first).to eq('192.168.10.10')
+        end
 
-      it 'can discover nodes with tags' do
-        expect(consul_tags_leader_nohealth.first).to eq('192.168.10.10')
-      end
-
-      it 'can discover nodes with tags and health' do
-        expect(consul_tags_leader_health.first).to eq('192.168.10.10')
+        it 'and health' do
+          expect(consul_tags_leader_health.first).to eq('192.168.10.10')
+        end
       end
     end
 
-    context 'can discover all nodes' do
-      it 'can discover nodes without tags' do
-        expect(consul_notags_noleader_nohealth.last).to eq('192.168.10.15')
+    context 'all nodes' do
+      context 'without tags' do
+        it do
+          expect(consul_notags_noleader_nohealth.last).to eq('192.168.10.15')
+        end
       end
 
-      it 'can discover nodes without tags and health' do
-        expect(consul_notags_noleader_health.last).to eq('192.168.10.13')
+      it 'and health' do
+        healthy_nodes = ['192.168.10.10', '192.168.10.13']
+        expect(consul_notags_noleader_health).to eq(healthy_nodes)
       end
 
-      it 'can discover nodes with tags' do
-        expect(consul_tags_noleader_nohealth.length).to eq(3)
+      context 'with tags' do
+        it do
+          expect(consul_tags_noleader_nohealth.length).to eq(3)
+        end
       end
 
-      it 'can discover nodes with tags and health' do
-        expect(consul_tags_noleader_health.length).to eq(1)
+      it 'and health' do
+        expect(consul_tags_noleader_health).to eq(['192.168.10.10'])
       end
     end
   end
