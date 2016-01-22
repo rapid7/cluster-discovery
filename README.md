@@ -7,7 +7,7 @@ Cluster providers are something that provides metadata about a collection of hos
 
 * [x] EC2 Tags
 * [x] EC2 AutoScaling Groups
-* [ ] Consul Services
+* [x] Consul Services
 * [ ] Static Lists
 
 ## Installation
